@@ -1,4 +1,4 @@
-package java8.examples;
+package java8.examples.streamapi;
 
 public class Person {
     String name;
