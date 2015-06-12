@@ -1,0 +1,39 @@
+# ====================================
+#   OS generated files 
+# ====================================
+ehthumbs.db
+#Icon?
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vagrant
+# ====================================
+#   Eclipse, Idea, ...
+# ====================================
+*.pydevproject
+*.project
+.metadata
+bin
+tmp
+**/.idea/**
+.idea
+*.tmp
+*.bak
+*.swp
+*~.nib
+.loadpath
+.jpage
+*.iml
+**/*.iml
+**/*.ipr
+**/.idea
+target
+.settings
+.project
+.classpath
+.tomcatplugin
+work
+.#webclasspath
+.externalToolBuilders/
+.vimdir
+.profiler
