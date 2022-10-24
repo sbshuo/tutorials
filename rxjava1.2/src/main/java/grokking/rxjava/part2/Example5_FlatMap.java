@@ -84,11 +84,43 @@ public class Example5_FlatMap {
         .flatMap(url -> getTitle(url)).subscribe(title -> System.out.println(title));
   }
 
+  public static void filterWithTwoFlatMaps() {
+    query("Hello, world!")
+        .flatMap(urls -> Observable
+            .from(urls.stream().map(url -> url + " -twoFlatMapped").collect(Collectors.toList())))
+        .flatMap(url -> getTitle(url)).filter(title -> title != null)
+        .subscribe(title -> System.out.println(title));
+  }
+
+  public static void take2WithTwoFlatMaps() {
+    query("Hello, world!")
+        .flatMap(urls -> Observable
+            .from(urls.stream().map(url -> url + " -twoFlatMapped").collect(Collectors.toList())))
+        .flatMap(url -> getTitle(url)).filter(title -> title != null).take(2)
+        .subscribe(title -> System.out.println(title));
+  }
+
+  public static void saveTitleWithTwoFlatMaps() {
+    query("Hello, world!")
+        .flatMap(urls -> Observable
+            .from(urls.stream().map(url -> url + " -twoFlatMapped").collect(Collectors.toList())))
+        .flatMap(url -> getTitle(url)).filter(title -> title != null).take(2).doOnNext(title -> saveTitle(title))
+        .subscribe(title -> System.out.println(title));
+  }
+
+  public static void saveTitle(String title) {
+    System.out.println("Saving title: " + title);
+  }
+  
   public static void main(String[] args) {
     noMap();
     uglyMap();
     simpleFlatMap();
     lamdaFlatMap();
     simpleTwoFlatMaps();
+    lamdaTwoFlatMaps();
+    filterWithTwoFlatMaps();
+    take2WithTwoFlatMaps();
+    saveTitleWithTwoFlatMaps();
   }
 }
