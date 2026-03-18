@@ -8,24 +8,24 @@ graph TD
         Frontend[Frontend Application] -- "API Requests (e.g., /consult)" --> API_Layer
         
         subgraph API_Layer ["API Endpoints (app/api/v1/)"]
-            router_stylist[stylist.py<br>(AI Stylist Endpoints)]
-            router_rentals[rentals.py<br>(Rental Logic Endpoints)]
+            router_stylist["stylist.py<br>(AI Stylist Endpoints)"]
+            router_rentals["rentals.py<br>(Rental Logic Endpoints)"]
         end
         
         API_Layer -- "Validated Request Data" --> Service_Layer
         
         subgraph Service_Layer ["Business Logic (app/services/)"]
-            service_ai_stylist[ai_stylist.py<br>(LLM Orchestration)]
-            service_inventory[inventory.py<br>(Fashion Catalog Management)]
+            service_ai_stylist["ai_stylist.py<br>(LLM Orchestration)"]
+            service_inventory["inventory.py<br>(Fashion Catalog Management)"]
         end
         
         %% Component Interactions within Service Layer
-        service_ai_stylist -- "1. Formats Prompt" --> Prompts[System Prompts<br>(Config / File)]
+        service_ai_stylist -- "1. Formats Prompt" --> Prompts["System Prompts<br>(Config / File)"]
         service_ai_stylist -- "2. Async API Call" --> External_AI_APIs
-        service_ai_stylist -- "3. Check Cache" --> Redis_Cache[Redis Cache<br>(Response Caching)]
+        service_ai_stylist -- "3. Check Cache" --> Redis_Cache["Redis Cache<br>(Response Caching)"]
         service_ai_stylist -- "4. Store/Retrieve Session" --> Redis_Cache
         
-        service_inventory -- "Manage Catalog" --> SQL_DB[Relational DB (PostgreSQL)<br>(Inventory, Users, Rentals)]
+        service_inventory -- "Manage Catalog" --> SQL_DB["Relational DB (PostgreSQL)<br>(Inventory, Users, Rentals)"]
         service_inventory -- "Generate Embeddings" --> External_Embedding_API
         
         service_ai_stylist -- "Recommend Items" --> service_inventory
@@ -33,8 +33,8 @@ graph TD
     
     %% External Services
     subgraph External_APIs ["External Cloud Services (via Async API Calls)"]
-        External_AI_APIs[LLM APIs<br>(Gemini / ChatGPT)]
-        External_Embedding_API[Embedding API<br>(Vector Generation)]
+        External_AI_APIs["LLM APIs<br>(Gemini / ChatGPT)"]
+        External_Embedding_API["Embedding API<br>(Vector Generation)"]
     end
     
     %% Data Persistence Layer
@@ -43,7 +43,7 @@ graph TD
         Redis_Cache -- "Fast Read/Write" --> Redis_Server[Redis Server]
         
         %% Vector Database
-        Vector_DB[Vector Database<br>(AlloyDB / Astra DB)] -- "Semantic Search<br>(Styling Embeddings)" --> service_inventory
+        Vector_DB["Vector Database<br>(AlloyDB / Astra DB)"] -- "Semantic Search<br>(Styling Embeddings)" --> service_inventory
         service_inventory -- "Upsert Embeddings" --> Vector_DB
     end
 
